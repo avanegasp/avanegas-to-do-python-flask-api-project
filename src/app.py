@@ -3,8 +3,14 @@ from flask import Flask, jsonify, request
 app = Flask(__name__)
 
 todos = [
-    {"label": "My first task", "done": False}, 
-     {"label": "My second task", "done": False}
+    {
+        "done": False,
+        "label": "My first task", 
+    },
+    {
+        "done": False,
+        "label": "My second task",
+    }
 ]
 
 @app.route('/todos', methods=['GET'])
@@ -18,7 +24,7 @@ def add_new_todo():
     request_body = request.json
     print("Incoming request with the following body", request_body)
     todos.append(request_body)
-    return jsonify(todos),201
+    return jsonify(todos),200
 
 
 @app.route('/todos/<int:position>', methods=['DELETE'])
@@ -29,8 +35,6 @@ def delete_todo(position):
         return jsonify(todos)
     else:
         return "Error: Todo not found", 404
-
-
 
 
 if __name__ == '__main__':

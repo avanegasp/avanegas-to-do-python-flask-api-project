@@ -22,6 +22,14 @@ def hello_world():
 @app.route('/todos', methods=['POST'])
 def add_new_todo():
     request_body = request.json
+    label = request_body.get("label", None)
+    done = request_body.get("done", None)
+
+    if label is None:
+        return jsonify({"error": "El label es requerido"}), 400
+    if done is None:
+        return jsonify({"error": "El done es requerido"}),400
+
     print("Incoming request with the following body", request_body)
     todos.append(request_body)
     return jsonify(todos),200

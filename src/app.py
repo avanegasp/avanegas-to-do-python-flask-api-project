@@ -30,7 +30,8 @@ def add_new_todo():
     if done is None:
         return jsonify({"error": "El done es requerido"}),400
 
-    print("Incoming request with the following body", request_body)
+    # print("Incoming request with the following body", request_body)
+
     todos.append(request_body)
     return jsonify(todos),200
 
